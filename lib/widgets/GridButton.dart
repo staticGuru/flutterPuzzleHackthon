@@ -15,9 +15,10 @@ class GridButton extends StatelessWidget {
         style: TextStyle(
           fontSize: 30,
           fontWeight: FontWeight.bold,
+          color: Colors.white,
         ),
       ),
-      color: Colors.white,
+      color: Color.fromARGB(220, 132, 36, 12),
       shape: RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(8.0),
       ),
