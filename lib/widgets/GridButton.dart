@@ -6,9 +6,6 @@ class GridButton extends StatelessWidget {
   String text;
   // final player = AudioPlayer();
   GridButton(this.text, this.click);
-  AudioCache audioCache = AudioCache();
-
-  AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +21,7 @@ class GridButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(8.0),
       ),
-      onPressed: () => audioCache.play('MyCustomSoundEffect.mp3',
-          mode: PlayerMode.MEDIA_PLAYER),
+      onPressed: click,
     );
   }
 }

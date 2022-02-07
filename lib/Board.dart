@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'widgets/Menu.dart';
 import 'widgets/MyTitle.dart';
@@ -16,7 +17,9 @@ class _BoardState extends State<Board> {
   int secondsPassed = 0;
   bool isActive = false;
   Timer timer;
+  AudioCache audioCache = AudioCache();
 
+  AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
   // _BoardState(this._audioCache);
 
   @override
@@ -57,7 +60,7 @@ class _BoardState extends State<Board> {
   void clickGrid(index) {
     // playLocalAsset();
     // _audioCache.play('MyCustomSoundEffect.mp3');
-
+    audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
     if (secondsPassed == 0) {
       isActive = true;
     }
