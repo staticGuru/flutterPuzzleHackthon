@@ -8,13 +8,19 @@ class ResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: reset,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(30.0),
+    return Container(
+      child: GestureDetector(
+        child: Icon(
+          Icons.replay,
+        ),
+        onTap: reset,
       ),
-      child: Text("Reset"),
+      width: 30,
+      height: 30,
+      decoration: new BoxDecoration(
+        color: Colors.green,
+        shape: BoxShape.circle,
+      ),
     );
   }
 }

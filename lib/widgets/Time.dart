@@ -13,15 +13,28 @@ class Time extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 12.0),
-      child: Text(
-        "Time: ${_printDuration(Duration(seconds: this.secondsPassed))}",
-        style: TextStyle(
-          fontSize: 18,
-          decoration: TextDecoration.none,
-          color: Colors.white,
-        ),
+    return Container(
+      padding: EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: Colors.green,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Padding(
+            child: Icon(Icons.timer),
+            padding: EdgeInsets.only(right: 5),
+          ),
+          Text(
+            "${_printDuration(Duration(seconds: this.secondsPassed))}",
+            style: TextStyle(
+              fontSize: 18,
+              decoration: TextDecoration.none,
+              color: Colors.white,
+            ),
+          )
+        ],
       ),
     );
   }
