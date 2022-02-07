@@ -10,13 +10,14 @@ class Board extends StatefulWidget {
 }
 
 class _BoardState extends State<Board> {
-  var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+  var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   int move = 0;
-
   static const duration = const Duration(seconds: 1);
   int secondsPassed = 0;
   bool isActive = false;
   Timer timer;
+
+  // _BoardState(this._audioCache);
 
   @override
   void initState() {
@@ -48,7 +49,15 @@ class _BoardState extends State<Board> {
     );
   }
 
+  // Future<AudioPlayer> playLocalAsset() async {
+  //   AudioCache cache = new AudioCache();
+  //   return await cache.play("myCustomSoundEffect.mp3");
+  // }
+
   void clickGrid(index) {
+    // playLocalAsset();
+    // _audioCache.play('MyCustomSoundEffect.mp3');
+
     if (secondsPassed == 0) {
       isActive = true;
     }

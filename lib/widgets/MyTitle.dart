@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class MyTitle extends StatelessWidget {
@@ -12,7 +11,7 @@ class MyTitle extends StatelessWidget {
       height: size.height * 0.10,
       padding: EdgeInsets.all(5.0),
       child: Text(
-        "Sliding Puzzle",
+        "Puzzle Hack",
         style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: size.height * 0.050,
