@@ -43,9 +43,9 @@ class _BoardState extends State<Board> {
         color: Color.fromARGB(230, 218, 109, 66),
         child: Column(
           children: <Widget>[
-            MyTitle(size),
-            Grid(numbers, size, clickGrid),
             Menu(reset, move, secondsPassed, size),
+            Grid(numbers, size, clickGrid),
+            MyTitle(size),
           ],
         ),
       ),
