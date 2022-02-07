@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'GridButton.dart';
 
 class Grid extends StatelessWidget {
@@ -16,21 +17,7 @@ class Grid extends StatelessWidget {
       height: height * 0.75,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(6, 50, 6, 20),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            mainAxisSpacing: 5,
-            crossAxisSpacing: 5,
-          ),
-          itemCount: numbers.length,
-          itemBuilder: (context, index) {
-            return numbers[index] != 0
-                ? GridButton("${numbers[index]}", () {
-                    clickGrid(index);
-                  })
-                : SizedBox.shrink();
-          },
-        ),
+        child: Lottie.asset('assets/animations/ResetAnimation.json'),
       ),
     );
   }
