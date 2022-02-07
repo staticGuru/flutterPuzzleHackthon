@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 class ResetButton extends StatelessWidget {
@@ -5,6 +6,15 @@ class ResetButton extends StatelessWidget {
   String text;
 
   ResetButton(this.reset, this.text);
+  AudioCache audioCache = AudioCache();
+
+  AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+  void ResetCall() {
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      reset();
+    });
+    audioCache.play('ResetSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +23,9 @@ class ResetButton extends StatelessWidget {
         child: Icon(
           Icons.replay,
         ),
-        onTap: reset,
+        onTap: () {
+          ResetCall();
+        },
       ),
       width: 30,
       height: 30,

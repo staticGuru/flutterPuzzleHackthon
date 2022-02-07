@@ -58,8 +58,6 @@ class _BoardState extends State<Board> {
   // }
 
   void clickGrid(index) {
-    // playLocalAsset();
-    // _audioCache.play('MyCustomSoundEffect.mp3');
     audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
     if (secondsPassed == 0) {
       isActive = true;
