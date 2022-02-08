@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class levelSelection extends StatefulWidget {
   @override
@@ -28,8 +29,15 @@ class _levelSelectionState extends State<levelSelection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(239, 255, 255, 255),
       appBar: AppBar(
-        title: Text('Levels'),
+        title: Text('Levels',
+            style: GoogleFonts.architectsDaughter(
+              textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            )),
         centerTitle: true,
         backgroundColor: Colors.green[400],
       ),
@@ -47,16 +55,44 @@ class _levelSelectionState extends State<levelSelection> {
             return Container(
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    )),
+                  color: Color.fromARGB(230, 218, 109, 66),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
                 child: Center(
-                    child: Column(children: [
+                    child: ListView(children: [
                   Image.network(images[index], fit: BoxFit.cover, width: 1000),
-                  Center(child: Text("Easy")),
-                  Center(child: Text("4 X 4")),
-                  Center(child: Text("Matrix"))
+                  SizedBox(height: 20),
+                  Center(
+                      child: Text("Medium",
+                          style: GoogleFonts.architectsDaughter(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: .5,
+                                fontSize: 50,
+                                fontWeight: FontWeight.bold),
+                          ))),
+                  SizedBox(height: 10),
+                  Center(
+                      child: Text("4x4",
+                          style: GoogleFonts.architectsDaughter(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.w500),
+                          ))),
+                  SizedBox(height: 1),
+                  Center(
+                      child: Text(
+                    "Matrix",
+                    style: GoogleFonts.architectsDaughter(
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300),
+                    ),
+                  ))
                 ])));
           },
         )),
