@@ -26,6 +26,7 @@ class _BoardState extends State<Board> {
   void initState() {
     super.initState();
     numbers.shuffle();
+    audioCache.loop('backgroundSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
   }
 
   @override
