@@ -9,7 +9,7 @@ class Menu extends StatelessWidget {
   int secondsPassed;
   var size;
 
-  Menu(this.reset, this.move, this.secondsPassed, this.size);
+  Menu(this.reset, this.move, this.secondsPassed, this.size, [bool sound]);
 
   @override
   Widget build(BuildContext context) {

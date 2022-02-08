@@ -17,16 +17,16 @@ class _BoardState extends State<Board> {
   int secondsPassed = 0;
   bool isActive = false;
   Timer timer;
+  bool sound = false;
   AudioCache audioCache = AudioCache();
 
   AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-  // _BoardState(this._audioCache);
 
   @override
   void initState() {
     super.initState();
     numbers.shuffle();
-    audioCache.loop('backgroundSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
+    // audioCache.loop('backgroundSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
   }
 
   @override
@@ -44,7 +44,7 @@ class _BoardState extends State<Board> {
         color: Color.fromARGB(230, 218, 109, 66),
         child: Column(
           children: <Widget>[
-            Menu(reset, move, secondsPassed, size),
+            Menu(reset, move, secondsPassed, size, sound),
             Grid(numbers, size, clickGrid),
             MyTitle(size),
           ],
