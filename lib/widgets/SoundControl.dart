@@ -9,8 +9,8 @@ class SoundControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Icon(MaterialCommunityIcons.soundcloud),
-      width: 100,
+      child: Icon(Ionicons.md_volume_high_outline, color: Colors.white),
+      width: 20,
       height: 30,
       padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
       decoration: new BoxDecoration(

@@ -19,7 +19,7 @@ class SlidingPuzzle extends StatelessWidget {
     return MaterialApp(
       title: "Sliding Puzzle",
       debugShowCheckedModeBanner: false,
-      home: Board(),
+      home: SafeArea(child: Board()),
     );
   }
 }

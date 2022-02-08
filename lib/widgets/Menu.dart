@@ -17,6 +17,7 @@ class Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: size.height * 0.10,
+      color: Colors.green,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
