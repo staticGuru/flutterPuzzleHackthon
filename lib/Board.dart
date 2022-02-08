@@ -28,26 +28,6 @@ class _BoardState extends State<Board> {
     13,
     14,
     15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35
   ];
   int move = 0;
   static const duration = const Duration(seconds: 1);
@@ -90,28 +70,24 @@ class _BoardState extends State<Board> {
     );
   }
 
-  // Future<AudioPlayer> playLocalAsset() async {
-  //   AudioCache cache = new AudioCache();
-  //   return await cache.play("myCustomSoundEffect.mp3");
-  // }
-
-  // void clickGrid(index) {
-  //   audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
-  //   if (secondsPassed == 0) {
-  //     isActive = true;
-  //   }
-  //   if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 4 != 0 ||
-  //       index + 1 < 16 && numbers[index + 1] == 0 && (index + 1) % 4 != 0 ||
-  //       (index - 4 >= 0 && numbers[index - 4] == 0) ||
-  //       (index + 4 < 16 && numbers[index + 4] == 0)) {
-  //     setState(() {
-  //       move++;
-  //       numbers[numbers.indexOf(0)] = numbers[index];
-  //       numbers[index] = 0;
-  //     });
-  //   }
-  //   checkWin();
-  // }
+  void clickGrid(index) {
+    audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
+    if (secondsPassed == 0) {
+      isActive = true;
+    }
+    if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 4 != 0 ||
+        index + 1 < 16 && numbers[index + 1] == 0 && (index + 1) % 4 != 0 ||
+        (index - 4 >= 0 && numbers[index - 4] == 0) ||
+        (index + 4 < 16 && numbers[index + 4] == 0)) {
+      setState(() {
+        move++;
+        numbers[numbers.indexOf(0)] = numbers[index];
+        numbers[index] = 0;
+      });
+    }
+    checkWin();
+  }
+  //Medium level
   // void clickGrid(index) {
   //   audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
   //   if (secondsPassed == 0) {
@@ -129,23 +105,25 @@ class _BoardState extends State<Board> {
   //   }
   //   checkWin();
   // }
-  void clickGrid(index) {
-    audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
-    if (secondsPassed == 0) {
-      isActive = true;
-    }
-    if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 6 != 0 ||
-        index + 1 < 36 && numbers[index + 1] == 0 && (index + 1) % 6 != 0 ||
-        (index - 6 >= 0 && numbers[index - 6] == 0) ||
-        (index + 6 < 36 && numbers[index + 6] == 0)) {
-      setState(() {
-        move++;
-        numbers[numbers.indexOf(0)] = numbers[index];
-        numbers[index] = 0;
-      });
-    }
-    checkWin();
-  }
+
+  //Hard level
+  // void clickGrid(index) {
+  //   audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
+  //   if (secondsPassed == 0) {
+  //     isActive = true;
+  //   }
+  //   if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 6 != 0 ||
+  //       index + 1 < 36 && numbers[index + 1] == 0 && (index + 1) % 6 != 0 ||
+  //       (index - 6 >= 0 && numbers[index - 6] == 0) ||
+  //       (index + 6 < 36 && numbers[index + 6] == 0)) {
+  //     setState(() {
+  //       move++;
+  //       numbers[numbers.indexOf(0)] = numbers[index];
+  //       numbers[index] = 0;
+  //     });
+  //   }
+  //   checkWin();
+  // }
 
   void startTime() {
     if (isActive) {

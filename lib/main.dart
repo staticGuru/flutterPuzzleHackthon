@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:slidingpuzzle/pages/levelSelection.dart';
 import 'Board.dart';
 
 main() async {
@@ -19,7 +20,12 @@ class SlidingPuzzle extends StatelessWidget {
     return MaterialApp(
       title: "Sliding Puzzle",
       debugShowCheckedModeBanner: false,
-      home: SafeArea(child: Board()),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => levelSelection(),
+        '/board': (context) => SafeArea(child: Board()),
+      },
+      // home: SafeArea(child: Board()),
     );
   }
 }

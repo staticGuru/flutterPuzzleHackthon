@@ -13,14 +13,14 @@ class GridButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 15,
+          fontSize: 30,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
       ),
       color: Color.fromARGB(220, 132, 36, 12),
       shape: RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(10.0),
+        borderRadius: new BorderRadius.circular(8.0),
       ),
       onPressed: click,
     );
