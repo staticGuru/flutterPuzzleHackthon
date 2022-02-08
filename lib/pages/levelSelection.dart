@@ -39,7 +39,7 @@ class _levelSelectionState extends State<levelSelection> {
                   fontWeight: FontWeight.bold),
             )),
         centerTitle: true,
-        backgroundColor: Colors.green[400],
+        backgroundColor: Color.fromARGB(230, 218, 109, 66),
       ),
       body: Center(
         child: Container(
@@ -73,7 +73,7 @@ class _levelSelectionState extends State<levelSelection> {
                                 fontSize: 50,
                                 fontWeight: FontWeight.bold),
                           ))),
-                  SizedBox(height: 10),
+                  SizedBox(height: 5),
                   Center(
                       child: Text("4x4",
                           style: GoogleFonts.architectsDaughter(
@@ -82,17 +82,18 @@ class _levelSelectionState extends State<levelSelection> {
                                 fontSize: 40,
                                 fontWeight: FontWeight.w500),
                           ))),
-                  SizedBox(height: 1),
-                  Center(
-                      child: Text(
-                    "Matrix",
-                    style: GoogleFonts.architectsDaughter(
-                      textStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w300),
-                    ),
-                  ))
+                  Container(
+                    color: Colors.green[400],
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Text("Play Now",
+                            style: GoogleFonts.architectsDaughter(
+                              textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold),
+                            ))),
+                  )
                 ])));
           },
         )),
