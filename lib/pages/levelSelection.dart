@@ -10,19 +10,19 @@ class levelSelection extends StatefulWidget {
 }
 
 class _levelSelectionState extends State<levelSelection> {
-  final List<String> images = [
-    'assets/images/4x4.png',
-    'https://images.unsplash.com/photo-1586871608370-4adee64d1794?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2862&q=80',
-    'https://images.unsplash.com/photo-1586901533048-0e856dff2c0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+  final List<Map<String, String>> images = [
+    {"image": 'assets/images/4x4.png', "name": "Easy", "number": "4x4"},
+    {"image": 'assets/images/4x4.png', "name": "Medium", "number": "5x5"},
+    {"image": 'assets/images/4x4.png', "name": "Hard", "number": "6x6"},
   ];
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      images.forEach((imageUrl) {
-        precacheImage(NetworkImage(imageUrl), context);
-      });
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   images.forEach((imageUrl) {
+    //     precacheImage(NetworkImage(imageUrl), context);
+    //   });
+    // });
     super.initState();
   }
 
@@ -62,11 +62,11 @@ class _levelSelectionState extends State<levelSelection> {
                 ),
                 child: Center(
                     child: ListView(children: [
-                  Image.asset(images[0],
+                  Image.asset(images[index]["image"],
                       fit: BoxFit.fill, width: 1000, height: 200),
                   SizedBox(height: 10),
                   Center(
-                      child: Text("Medium",
+                      child: Text(images[index]["name"],
                           style: GoogleFonts.architectsDaughter(
                             textStyle: TextStyle(
                                 color: Colors.white,
@@ -76,7 +76,7 @@ class _levelSelectionState extends State<levelSelection> {
                           ))),
                   SizedBox(height: 5),
                   Center(
-                      child: Text("4x4",
+                      child: Text(images[index]["number"],
                           style: GoogleFonts.architectsDaughter(
                             textStyle: TextStyle(
                                 color: Colors.white,
@@ -86,7 +86,12 @@ class _levelSelectionState extends State<levelSelection> {
                   Container(
                     color: Colors.green[400],
                     child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/board',
+                          );
+                        },
                         child: Text("Play Now",
                             style: GoogleFonts.architectsDaughter(
                               textStyle: TextStyle(
