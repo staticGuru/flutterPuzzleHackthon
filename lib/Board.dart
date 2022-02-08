@@ -46,7 +46,7 @@ class _BoardState extends State<Board> {
           children: <Widget>[
             Menu(reset, move, secondsPassed, size, sound),
             Grid(numbers, size, clickGrid),
-            MyTitle(size),
+            MyTitle(size, move),
           ],
         ),
       ),

@@ -17,7 +17,7 @@ class Move extends StatelessWidget {
               fontSize: 18),
         ),
       ),
-      width: 100,
+      width: 180,
       height: 30,
       padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
       decoration: new BoxDecoration(

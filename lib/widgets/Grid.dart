@@ -15,7 +15,7 @@ class Grid extends StatelessWidget {
     return Container(
       height: height * 0.75,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(6, 50, 6, 20),
+        padding: const EdgeInsets.fromLTRB(6, 40, 6, 10),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,

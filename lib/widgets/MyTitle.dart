@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:slidingpuzzle/widgets/Move.dart';
 
 class MyTitle extends StatelessWidget {
   var size;
+  int move;
 
-  MyTitle(this.size);
+  MyTitle(this.size, this.move);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(5.0),
-      child: Text(
-        "Puzzle Hack",
-        style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: size.height * 0.050,
-            color: Colors.green,
-            decoration: TextDecoration.none),
+      color: Colors.green,
+      width: double.infinity,
+      height: 96,
+      child: Column(
+        children: [
+          Text(
+            "Puzzle Hack",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: size.height * 0.050,
+                color: Colors.white,
+                decoration: TextDecoration.none),
+          ),
+          Move(move),
+        ],
       ),
     );
   }

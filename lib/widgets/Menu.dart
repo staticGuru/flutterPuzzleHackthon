@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slidingpuzzle/widgets/SoundControl.dart';
 import 'Time.dart';
 import 'ResetButton.dart';
 import 'Move.dart';
@@ -8,8 +9,9 @@ class Menu extends StatelessWidget {
   int move;
   int secondsPassed;
   var size;
+  bool sound;
 
-  Menu(this.reset, this.move, this.secondsPassed, this.size, [bool sound]);
+  Menu(this.reset, this.move, this.secondsPassed, this.size, this.sound);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,8 @@ class Menu extends StatelessWidget {
           children: <Widget>[
             ResetButton(reset, "Reset"),
             Time(secondsPassed),
-            Move(move),
+            // Move(move),
+            SoundControl(sound)
           ],
         ),
       ),
