@@ -11,7 +11,7 @@ class levelSelection extends StatefulWidget {
 
 class _levelSelectionState extends State<levelSelection> {
   final List<String> images = [
-    'https://images.unsplash.com/photo-1586882829491-b81178aa622e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
+    'assets/images/4x4.png',
     'https://images.unsplash.com/photo-1586871608370-4adee64d1794?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2862&q=80',
     'https://images.unsplash.com/photo-1586901533048-0e856dff2c0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
   ];
@@ -62,8 +62,9 @@ class _levelSelectionState extends State<levelSelection> {
                 ),
                 child: Center(
                     child: ListView(children: [
-                  Image.network(images[index], fit: BoxFit.cover, width: 1000),
-                  SizedBox(height: 20),
+                  Image.asset(images[0],
+                      fit: BoxFit.fill, width: 1000, height: 200),
+                  SizedBox(height: 10),
                   Center(
                       child: Text("Medium",
                           style: GoogleFonts.architectsDaughter(
