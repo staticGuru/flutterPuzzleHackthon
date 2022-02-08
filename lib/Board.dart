@@ -11,7 +11,33 @@ class Board extends StatefulWidget {
 }
 
 class _BoardState extends State<Board> {
-  var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  var numbers = [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+  ];
   int move = 0;
   static const duration = const Duration(seconds: 1);
   int secondsPassed = 0;
@@ -58,15 +84,32 @@ class _BoardState extends State<Board> {
   //   return await cache.play("myCustomSoundEffect.mp3");
   // }
 
+  // void clickGrid(index) {
+  //   audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
+  //   if (secondsPassed == 0) {
+  //     isActive = true;
+  //   }
+  //   if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 4 != 0 ||
+  //       index + 1 < 16 && numbers[index + 1] == 0 && (index + 1) % 4 != 0 ||
+  //       (index - 4 >= 0 && numbers[index - 4] == 0) ||
+  //       (index + 4 < 16 && numbers[index + 4] == 0)) {
+  //     setState(() {
+  //       move++;
+  //       numbers[numbers.indexOf(0)] = numbers[index];
+  //       numbers[index] = 0;
+  //     });
+  //   }
+  //   checkWin();
+  // }
   void clickGrid(index) {
     audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
     if (secondsPassed == 0) {
       isActive = true;
     }
-    if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 4 != 0 ||
-        index + 1 < 16 && numbers[index + 1] == 0 && (index + 1) % 4 != 0 ||
-        (index - 4 >= 0 && numbers[index - 4] == 0) ||
-        (index + 4 < 16 && numbers[index + 4] == 0)) {
+    if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 5 != 0 ||
+        index + 1 < 25 && numbers[index + 1] == 0 && (index + 1) % 5 != 0 ||
+        (index - 5 >= 0 && numbers[index - 5] == 0) ||
+        (index + 5 < 25 && numbers[index + 5] == 0)) {
       setState(() {
         move++;
         numbers[numbers.indexOf(0)] = numbers[index];
