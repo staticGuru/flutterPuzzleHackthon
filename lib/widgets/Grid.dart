@@ -4,9 +4,11 @@ import 'GridButton.dart';
 class Grid extends StatelessWidget {
   var numbers = [];
   var size;
+  int buttonsize;
   Function clickGrid;
+  int matrix;
 
-  Grid(this.numbers, this.size, this.clickGrid);
+  Grid(this.numbers, this.size, this.clickGrid, this.buttonsize, this.matrix);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class Grid extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(6, 40, 6, 10),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
+            crossAxisCount: matrix,
             mainAxisSpacing: 5,
             crossAxisSpacing: 5,
           ),
@@ -27,7 +29,7 @@ class Grid extends StatelessWidget {
             return numbers[index] != 0
                 ? GridButton("${numbers[index]}", () {
                     clickGrid(index);
-                  })
+                  }, buttonsize)
                 : SizedBox.shrink();
           },
         ),

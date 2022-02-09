@@ -14,24 +14,34 @@ class Board extends StatefulWidget {
 }
 
 class _BoardState extends State<Board> {
-  var numbers = [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
+  // var numbers = [
+  //   0,
+  //   1,
+  //   2,
+  //   3,
+  //   4,
+  //   5,
+  //   6,
+  //   7,
+  //   8,
+  //   9,
+  //   10,
+  //   11,
+  //   12,
+  //   13,
+  //   14,
+  //   15,
+  // ];
+
+  static final List<dynamic> gameData = [
+    {"arrayLength": 16, "matrix": 4, "buttonsize": 30},
+    {"arrayLength": 25, "matrix": 5, "buttonsize": 20},
+    {"arrayLength": 36, "matrix": 6, "buttonsize": 15}
   ];
+  int index = 0;
+  var numbers = [];
+
+  // int num = gameData[0]["arrayLength"];
   int move = 0;
   static const duration = const Duration(seconds: 1);
   int secondsPassed = 0;
@@ -41,16 +51,23 @@ class _BoardState extends State<Board> {
   AudioCache audioCache = AudioCache();
 
   AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+
   @override
   void initState() {
     super.initState();
+    numbers =
+        Iterable<int>.generate(gameData[widget.index]["arrayLength"]).toList();
+
     numbers.shuffle();
+    print(widget.index);
+
     // audioCache.loop('backgroundSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
   }
 
   @override
   Widget build(BuildContext context) {
     print(widget.index);
+    int buttonsize = gameData[widget.index]["buttonsize"];
 
     final size = MediaQuery.of(context).size;
     if (timer == null) {
@@ -66,7 +83,8 @@ class _BoardState extends State<Board> {
         child: Column(
           children: <Widget>[
             Menu(reset, move, secondsPassed, size, sound),
-            Grid(numbers, size, clickGrid),
+            Grid(numbers, size, clickGrid, gameData[widget.index]["buttonsize"],
+                gameData[widget.index]["matrix"]),
             MyTitle(size, move),
           ],
         ),
@@ -79,10 +97,20 @@ class _BoardState extends State<Board> {
     if (secondsPassed == 0) {
       isActive = true;
     }
-    if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 4 != 0 ||
-        index + 1 < 16 && numbers[index + 1] == 0 && (index + 1) % 4 != 0 ||
-        (index - 4 >= 0 && numbers[index - 4] == 0) ||
-        (index + 4 < 16 && numbers[index + 4] == 0)) {
+    if (index - 1 >= 0 &&
+            numbers[index - 1] == 0 &&
+            index % gameData[widget.index]["matrix"] != 0 ||
+        index + 1 <
+                (gameData[widget.index]["matrix"] *
+                    gameData[widget.index]["matrix"]) &&
+            numbers[index + 1] == 0 &&
+            (index + 1) % gameData[widget.index]["matrix"] != 0 ||
+        (index - gameData[widget.index]["matrix"] >= 0 &&
+            numbers[index - gameData[widget.index]["matrix"]] == 0) ||
+        (index + gameData[widget.index]["matrix"] <
+                (gameData[widget.index]["matrix"] *
+                    gameData[widget.index]["matrix"]) &&
+            numbers[index + gameData[widget.index]["matrix"]] == 0)) {
       setState(() {
         move++;
         numbers[numbers.indexOf(0)] = numbers[index];

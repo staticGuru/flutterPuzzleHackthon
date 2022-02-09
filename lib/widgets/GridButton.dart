@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class GridButton extends StatelessWidget {
   Function click;
   String text;
+  int buttonsize;
   // final player = AudioPlayer();
-  GridButton(this.text, this.click);
+  GridButton(this.text, this.click, this.buttonsize);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class GridButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 30,
+          fontSize: buttonsize.toDouble(),
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
