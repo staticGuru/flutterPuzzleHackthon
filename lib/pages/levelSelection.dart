@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:slidingpuzzle/Board.dart';
 
 class levelSelection extends StatefulWidget {
   @override
@@ -87,10 +88,11 @@ class _levelSelectionState extends State<levelSelection> {
                     color: Colors.green[400],
                     child: TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/board',
-                          );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      SafeArea(child: Board())));
                         },
                         child: Text("Play Now",
                             style: GoogleFonts.architectsDaughter(

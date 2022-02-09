@@ -20,12 +20,12 @@ class SlidingPuzzle extends StatelessWidget {
     return MaterialApp(
       title: "Sliding Puzzle",
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => levelSelection(),
-        '/board': (context) => SafeArea(child: Board()),
-      },
-      // home: SafeArea(child: Board()),
+      // initialRoute: '/',
+      // routes: {
+      //   '/': (context) => levelSelection(),
+      //   '/board': (context) => SafeArea(child: Board()),
+      // },
+      home: SafeArea(child: levelSelection()),
     );
   }
 }
