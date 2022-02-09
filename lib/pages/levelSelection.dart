@@ -11,7 +11,7 @@ class levelSelection extends StatefulWidget {
 }
 
 class _levelSelectionState extends State<levelSelection> {
-  final List<Map<String, String>> images = [
+  final List<dynamic> images = [
     {"image": 'assets/images/4x4.png', "name": "Easy", "number": "4x4"},
     {"image": 'assets/images/4x4.png', "name": "Medium", "number": "5x5"},
     {"image": 'assets/images/4x4.png', "name": "Hard", "number": "6x6"},
@@ -92,7 +92,7 @@ class _levelSelectionState extends State<levelSelection> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      SafeArea(child: Board())));
+                                      SafeArea(child: Board(index))));
                         },
                         child: Text("Play Now",
                             style: GoogleFonts.architectsDaughter(

@@ -6,6 +6,9 @@ import 'widgets/MyTitle.dart';
 import 'widgets/Grid.dart';
 
 class Board extends StatefulWidget {
+  int index = 0;
+  Board(this.index);
+
   @override
   _BoardState createState() => _BoardState();
 }
@@ -38,7 +41,6 @@ class _BoardState extends State<Board> {
   AudioCache audioCache = AudioCache();
 
   AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-
   @override
   void initState() {
     super.initState();
@@ -48,6 +50,8 @@ class _BoardState extends State<Board> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.index);
+
     final size = MediaQuery.of(context).size;
     if (timer == null) {
       timer = Timer.periodic(duration, (Timer t) {
