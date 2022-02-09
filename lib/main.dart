@@ -2,8 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+import 'package:slidingpuzzle/models/app_state.dart';
 import 'package:slidingpuzzle/pages/levelSelection.dart';
 import 'Board.dart';
+import 'package:slidingpuzzle/redux/reducers.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,21 +15,30 @@ main() async {
     DeviceOrientation.portraitUp,
   ]);
   await SystemChrome.setEnabledSystemUIOverlays([]);
-  runApp(SlidingPuzzle());
+  final _initialState = AppState();
+  final Store<AppState> _store =
+      Store<AppState>(reducer, initialState: _initialState);
+  runApp(SlidingPuzzle(store: _store));
 }
 
 class SlidingPuzzle extends StatelessWidget {
+  final Store<AppState> store;
+
+  SlidingPuzzle({this.store});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Sliding Puzzle",
-      debugShowCheckedModeBanner: false,
-      // initialRoute: '/',
-      // routes: {
-      //   '/': (context) => levelSelection(),
-      //   '/board': (context) => SafeArea(child: Board()),
-      // },
-      home: SafeArea(child: levelSelection()),
+    return StoreProvider<AppState>(
+      store: store,
+      child: MaterialApp(
+        title: "Sliding Puzzle",
+        debugShowCheckedModeBanner: false,
+        // initialRoute: '/',
+        // routes: {
+        //   '/': (context) => levelSelection(),
+        //   '/board': (context) => SafeArea(child: Board()),
+        // },
+        home: SafeArea(child: levelSelection()),
+      ),
     );
   }
 }

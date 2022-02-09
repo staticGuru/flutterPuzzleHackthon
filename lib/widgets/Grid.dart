@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lottie/lottie.dart';
+import 'package:slidingpuzzle/models/app_state.dart';
 import 'GridButton.dart';
 
 class Grid extends StatelessWidget {
@@ -18,21 +21,25 @@ class Grid extends StatelessWidget {
       height: height * 0.75,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(6, 40, 6, 10),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: matrix,
-            mainAxisSpacing: 5,
-            crossAxisSpacing: 5,
-          ),
-          itemCount: numbers.length,
-          itemBuilder: (context, index) {
-            return numbers[index] != 0
-                ? GridButton("${numbers[index]}", () {
-                    clickGrid(index);
-                  }, buttonsize)
-                : SizedBox.shrink();
-          },
-        ),
+        child: StoreConnector<AppState, AppState>(
+            converter: (store) => store.state,
+            builder: (context, state) {
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: matrix,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 5,
+                ),
+                itemCount: numbers.length,
+                itemBuilder: (context, index) {
+                  return numbers[index] != 0
+                      ? GridButton("${numbers[index]}", () {
+                          clickGrid(index);
+                        }, buttonsize)
+                      : SizedBox.shrink();
+                },
+              );
+            }),
       ),
     );
   }

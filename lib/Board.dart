@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lottie/lottie.dart';
+import 'package:slidingpuzzle/models/app_state.dart';
+import 'package:slidingpuzzle/redux/actions.dart';
 import 'widgets/Menu.dart';
 import 'widgets/MyTitle.dart';
 import 'widgets/Grid.dart';
@@ -14,25 +18,6 @@ class Board extends StatefulWidget {
 }
 
 class _BoardState extends State<Board> {
-  // var numbers = [
-  //   0,
-  //   1,
-  //   2,
-  //   3,
-  //   4,
-  //   5,
-  //   6,
-  //   7,
-  //   8,
-  //   9,
-  //   10,
-  //   11,
-  //   12,
-  //   13,
-  //   14,
-  //   15,
-  // ];
-
   static final List<dynamic> gameData = [
     {"arrayLength": 16, "matrix": 4, "buttonsize": 30},
     {"arrayLength": 25, "matrix": 5, "buttonsize": 20},
@@ -40,17 +25,17 @@ class _BoardState extends State<Board> {
   ];
   int index = 0;
   var numbers = [];
-
-  // int num = gameData[0]["arrayLength"];
   int move = 0;
   static const duration = const Duration(seconds: 1);
   int secondsPassed = 0;
   bool isActive = false;
   Timer timer;
   bool sound = false;
-  AudioCache audioCache = AudioCache();
-
-  AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+  // AudioCache audioCache = AudioCache();
+  var instance;
+  AudioPlayer player = new AudioPlayer();
+  AudioCache audioCache;
+  // AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
 
   @override
   void initState() {
@@ -59,15 +44,28 @@ class _BoardState extends State<Board> {
         Iterable<int>.generate(gameData[widget.index]["arrayLength"]).toList();
 
     numbers.shuffle();
-    print(widget.index);
 
-    // audioCache.loop('backgroundSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
+    audioCache = new AudioCache(fixedPlayer: player);
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      StoreProvider.of<AppState>(context).dispatch(Boardani(false));
+    });
+  }
+
+  @override
+  void dispose() {
+    // await audioPlayer.pause();
+    // await audioPlayer.dispose();
+    player.stop();
+    // audioCache.
+    StoreProvider.of<AppState>(context).dispatch(Boardani(true));
+
+    print("dispose called");
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     print(widget.index);
-    int buttonsize = gameData[widget.index]["buttonsize"];
 
     final size = MediaQuery.of(context).size;
     if (timer == null) {
@@ -76,19 +74,32 @@ class _BoardState extends State<Board> {
       });
     }
 
-    return SafeArea(
-      child: Container(
-        height: size.height,
-        color: Color.fromARGB(230, 218, 109, 66),
-        child: Column(
-          children: <Widget>[
-            Menu(reset, move, secondsPassed, size, sound),
-            Grid(numbers, size, clickGrid, gameData[widget.index]["buttonsize"],
-                gameData[widget.index]["matrix"]),
-            MyTitle(size, move),
-          ],
-        ),
-      ),
+    return Scaffold(
+      body: Container(
+          height: size.height,
+          color: Colors.transparent,
+          child: StoreConnector<AppState, AppState>(
+              converter: (store) => store.state,
+              builder: (context, state) {
+                return state.boardani
+                    ? Lottie.asset("assets/animations/ResetAnimation.json",
+                        fit: BoxFit.contain)
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Menu(reset, move, secondsPassed, size, sound),
+                          Grid(
+                              numbers,
+                              size,
+                              clickGrid,
+                              gameData[widget.index]["buttonsize"],
+                              gameData[widget.index]["matrix"]),
+                          MyTitle(size, move),
+                        ],
+                      );
+              })),
     );
   }
 
@@ -119,43 +130,6 @@ class _BoardState extends State<Board> {
     }
     checkWin();
   }
-  //Medium level
-  // void clickGrid(index) {
-  //   audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
-  //   if (secondsPassed == 0) {
-  //     isActive = true;
-  //   }
-  //   if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 5 != 0 ||
-  //       index + 1 < 25 && numbers[index + 1] == 0 && (index + 1) % 5 != 0 ||
-  //       (index - 5 >= 0 && numbers[index - 5] == 0) ||
-  //       (index + 5 < 25 && numbers[index + 5] == 0)) {
-  //     setState(() {
-  //       move++;
-  //       numbers[numbers.indexOf(0)] = numbers[index];
-  //       numbers[index] = 0;
-  //     });
-  //   }
-  //   checkWin();
-  // }
-
-  //Hard level
-  // void clickGrid(index) {
-  //   audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
-  //   if (secondsPassed == 0) {
-  //     isActive = true;
-  //   }
-  //   if (index - 1 >= 0 && numbers[index - 1] == 0 && index % 6 != 0 ||
-  //       index + 1 < 36 && numbers[index + 1] == 0 && (index + 1) % 6 != 0 ||
-  //       (index - 6 >= 0 && numbers[index - 6] == 0) ||
-  //       (index + 6 < 36 && numbers[index + 6] == 0)) {
-  //     setState(() {
-  //       move++;
-  //       numbers[numbers.indexOf(0)] = numbers[index];
-  //       numbers[index] = 0;
-  //     });
-  //   }
-  //   checkWin();
-  // }
 
   void startTime() {
     if (isActive) {
@@ -168,6 +142,13 @@ class _BoardState extends State<Board> {
   void reset() {
     setState(() {
       numbers.shuffle();
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        numbers.shuffle();
+      });
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        numbers.shuffle();
+      });
+
       move = 0;
       secondsPassed = 0;
       isActive = false;

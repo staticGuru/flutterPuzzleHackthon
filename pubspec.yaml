@@ -32,6 +32,8 @@ dependencies:
   flutter_vector_icons: ^1.0.0
   carousel_slider: ^4.0.0
   google_fonts: ^2.3.1
+  flutter_redux: ^0.8.2
+  redux: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +57,8 @@ flutter:
     - assets/backgroundSoundEffect.mp3
     - assets/images/clock.png
     - assets/images/4x4.png
+    - assets/images/5x5.png
+    - assets/images/6x6.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
