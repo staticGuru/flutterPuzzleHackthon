@@ -17,7 +17,7 @@ class Board extends StatefulWidget {
   _BoardState createState() => _BoardState();
 }
 
-class _BoardState extends State<Board> {
+class _BoardState extends State<Board> with WidgetsBindingObserver {
   static final List<dynamic> gameData = [
     {"arrayLength": 16, "matrix": 4, "buttonsize": 30},
     {"arrayLength": 25, "matrix": 5, "buttonsize": 20},
@@ -52,15 +52,17 @@ class _BoardState extends State<Board> {
   }
 
   @override
-  void dispose() {
-    // await audioPlayer.pause();
-    // await audioPlayer.dispose();
-    player.stop();
-    // audioCache.
-    StoreProvider.of<AppState>(context).dispatch(Boardani(true));
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print("Current state = $state");
+  }
 
-    print("dispose called");
-    super.dispose();
+  @override
+  void deactivate() {
+    StoreProvider.of<AppState>(context).dispatch(Boardani(true));
+    super.deactivate();
+
+    print("Current state deactivate");
   }
 
   @override
@@ -101,6 +103,14 @@ class _BoardState extends State<Board> {
                       );
               })),
     );
+  }
+
+  @override
+  void dispose() {
+    player.stop();
+
+    print("dispose called");
+    super.dispose();
   }
 
   void clickGrid(index) {
