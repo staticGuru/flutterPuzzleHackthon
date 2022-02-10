@@ -18,9 +18,9 @@ class Grid extends StatelessWidget {
     var height = size.height;
 
     return Container(
-      height: height * 0.75,
+      height: height * 0.5,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(6, 40, 6, 10),
+        padding: const EdgeInsets.fromLTRB(6, 5, 6, 5),
         child: StoreConnector<AppState, AppState>(
             converter: (store) => store.state,
             builder: (context, state) {

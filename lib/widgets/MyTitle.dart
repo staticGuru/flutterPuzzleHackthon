@@ -12,7 +12,7 @@ class MyTitle extends StatelessWidget {
     return Container(
       color: Colors.green,
       width: double.infinity,
-      height: 96,
+      height: 150,
       child: Column(
         children: [
           Text(

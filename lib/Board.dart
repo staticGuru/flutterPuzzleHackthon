@@ -61,8 +61,6 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   void deactivate() {
     StoreProvider.of<AppState>(context).dispatch(Boardani(true));
     super.deactivate();
-
-    print("Current state deactivate");
   }
 
   @override
