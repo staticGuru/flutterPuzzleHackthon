@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:slidingpuzzle/widgets/Move.dart';
+import 'package:slidingpuzzle/widgets/Speech.dart';
 
 class MyTitle extends StatelessWidget {
   var size;
   int move;
+  Function clickGrid;
 
-  MyTitle(this.size, this.move);
+  MyTitle(this.size, this.move, this.clickGrid);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,10 @@ class MyTitle extends StatelessWidget {
                 decoration: TextDecoration.none),
           ),
           Move(move),
+          Speech((e) {
+            print("eee $e");
+            clickGrid(e);
+          })
         ],
       ),
     );

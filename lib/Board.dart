@@ -96,7 +96,7 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
                               clickGrid,
                               gameData[widget.index]["buttonsize"],
                               gameData[widget.index]["matrix"]),
-                          MyTitle(size, move),
+                          MyTitle(size, move, clickGrid)
                         ],
                       );
               })),
@@ -111,32 +111,36 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  void clickGrid(index) {
-    audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
-    if (secondsPassed == 0) {
-      isActive = true;
+  void clickGrid(b) {
+    var index = b.runtimeType == int ? b : int.parse(b);
+    print("clikddd $b $index ${b.runtimeType}");
+    if (index != null) {
+      audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
+      if (secondsPassed == 0) {
+        isActive = true;
+      }
+      if (index - 1 >= 0 &&
+              numbers[index - 1] == 0 &&
+              index % gameData[widget.index]["matrix"] != 0 ||
+          index + 1 <
+                  (gameData[widget.index]["matrix"] *
+                      gameData[widget.index]["matrix"]) &&
+              numbers[index + 1] == 0 &&
+              (index + 1) % gameData[widget.index]["matrix"] != 0 ||
+          (index - gameData[widget.index]["matrix"] >= 0 &&
+              numbers[index - gameData[widget.index]["matrix"]] == 0) ||
+          (index + gameData[widget.index]["matrix"] <
+                  (gameData[widget.index]["matrix"] *
+                      gameData[widget.index]["matrix"]) &&
+              numbers[index + gameData[widget.index]["matrix"]] == 0)) {
+        setState(() {
+          move++;
+          numbers[numbers.indexOf(0)] = numbers[index];
+          numbers[index] = 0;
+        });
+      }
+      checkWin();
     }
-    if (index - 1 >= 0 &&
-            numbers[index - 1] == 0 &&
-            index % gameData[widget.index]["matrix"] != 0 ||
-        index + 1 <
-                (gameData[widget.index]["matrix"] *
-                    gameData[widget.index]["matrix"]) &&
-            numbers[index + 1] == 0 &&
-            (index + 1) % gameData[widget.index]["matrix"] != 0 ||
-        (index - gameData[widget.index]["matrix"] >= 0 &&
-            numbers[index - gameData[widget.index]["matrix"]] == 0) ||
-        (index + gameData[widget.index]["matrix"] <
-                (gameData[widget.index]["matrix"] *
-                    gameData[widget.index]["matrix"]) &&
-            numbers[index + gameData[widget.index]["matrix"]] == 0)) {
-      setState(() {
-        move++;
-        numbers[numbers.indexOf(0)] = numbers[index];
-        numbers[index] = 0;
-      });
-    }
-    checkWin();
   }
 
   void startTime() {
