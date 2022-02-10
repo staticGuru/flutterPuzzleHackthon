@@ -111,10 +111,15 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  void clickGrid(b) {
+  void clickGrid(b, mode) {
     var index = b.runtimeType == int ? b : int.parse(b);
-    print("clikddd $b $index ${b.runtimeType}");
+    print("clikddd $b $index ${b.runtimeType} $numbers");
+    if (index != null && mode == 'AI') {
+      index = numbers.indexOf(index) != -1 ? numbers.indexOf(index) : null;
+      print('ai $index');
+    }
     if (index != null) {
+      print(numbers.indexOf(index));
       audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
       if (secondsPassed == 0) {
         isActive = true;
@@ -139,6 +144,8 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
           numbers[index] = 0;
         });
       }
+      print(numbers);
+
       checkWin();
     }
   }

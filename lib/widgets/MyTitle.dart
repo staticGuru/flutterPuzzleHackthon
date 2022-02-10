@@ -28,7 +28,7 @@ class MyTitle extends StatelessWidget {
           Move(move),
           Speech((e) {
             print("eee $e");
-            clickGrid(e);
+            clickGrid(e, 'AI');
           })
         ],
       ),

@@ -135,9 +135,13 @@ class _SpeechState extends State<Speech> {
     setState(() {
       lastWords = '${result.recognizedWords} - ${result.finalResult}';
     });
-    widget.clickGrid(result.recognizedWords);
-    print("Answer ${result.recognizedWords}");
-    print('Answer ${int.parse(result.recognizedWords).runtimeType}');
+    print("Answer ${result.recognizedWords} ${result}");
+    print('Answer ${int.parse(result.recognizedWords).runtimeType} $result');
+    if (result.finalResult) {
+      widget.clickGrid(result.recognizedWords);
+    } else {
+      print(result.recognizedWords);
+    }
   }
 
   void soundLevelListener(double level) {
@@ -313,14 +317,25 @@ class SpeechControlWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        TextButton(
-          onPressed: !hasSpeech || isListening ? null : startListening,
-          child: Text('Start'),
-        ),
-        TextButton(
-          onPressed: isListening ? stopListening : null,
-          child: Text('Stop'),
-        ),
+        // TextButton(
+        //   onPressed: !hasSpeech || isListening ? null : startListening,
+        //   child: Text('Start'),
+        // ),
+        !isListening
+            ? GestureDetector(
+                onTap: !hasSpeech || isListening ? null : startListening,
+                child: Image.asset('assets/images/noaispeech.png',
+                    fit: BoxFit.fill, width: 60, height: 60),
+              )
+            : GestureDetector(
+                onTap: isListening ? stopListening : null,
+                child: Image.asset('assets/images/aispeech.png',
+                    fit: BoxFit.fill, width: 60, height: 60),
+              ),
+        // TextButton(
+        //   onPressed: isListening ? stopListening : null,
+        //   child: Text('Stop'),
+        // ),
         // TextButton(
         //   onPressed: isListening ? cancelListening : null,
         //   child: Text('Cancel'),

@@ -27,11 +27,11 @@ class ResetButton extends StatelessWidget {
           Icons.replay,
         ),
         onTap: () {
-          StoreProvider.of<AppState>(context).dispatch(Reset(true));
+          // StoreProvider.of<AppState>(context).dispatch(Reset(true));
           ResetCall();
-          Future.delayed(const Duration(milliseconds: 1200), () {
-            StoreProvider.of<AppState>(context).dispatch(Reset(false));
-          });
+          // Future.delayed(const Duration(milliseconds: 1200), () {
+          //   StoreProvider.of<AppState>(context).dispatch(Reset(false));
+          // });
         },
       ),
       width: 30,

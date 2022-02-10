@@ -60,6 +60,8 @@ flutter:
     - assets/images/4x4.png
     - assets/images/5x5.png
     - assets/images/6x6.png
+    - assets/images/aispeech.png
+    - assets/images/noaispeech.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
