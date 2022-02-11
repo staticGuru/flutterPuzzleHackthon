@@ -18,29 +18,27 @@ class Grid extends StatelessWidget {
     var height = size.height;
 
     return Container(
-      height: height * 0.5,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(6, 5, 6, 5),
-        child: StoreConnector<AppState, AppState>(
-            converter: (store) => store.state,
-            builder: (context, state) {
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: matrix,
-                  mainAxisSpacing: 5,
-                  crossAxisSpacing: 5,
-                ),
-                itemCount: numbers.length,
-                itemBuilder: (context, index) {
-                  return numbers[index] != 0
-                      ? GridButton("${numbers[index]}", () {
-                          clickGrid(index, 'MANUVAL');
-                        }, buttonsize)
-                      : SizedBox.shrink();
-                },
-              );
-            }),
-      ),
+          padding: const EdgeInsets.fromLTRB(6, 20, 6, 20),
+          child: StoreConnector<AppState, AppState>(
+              converter: (store) => store.state,
+              builder: (context, state) {
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: matrix,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 5,
+                  ),
+                  itemCount: numbers.length,
+                  itemBuilder: (context, index) {
+                    return numbers[index] != 0
+                        ? GridButton("${numbers[index]}", () {
+                            clickGrid(index, 'MANUVAL');
+                          }, buttonsize)
+                        : SizedBox.shrink();
+                  },
+                );
+              })),
     );
   }
 }

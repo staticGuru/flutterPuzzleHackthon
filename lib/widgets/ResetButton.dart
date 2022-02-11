@@ -22,22 +22,25 @@ class ResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: GestureDetector(
-        child: Icon(
-          Icons.replay,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 30),
+        child: GestureDetector(
+          child: Icon(
+            Icons.replay,
+          ),
+          onTap: () {
+            // StoreProvider.of<AppState>(context).dispatch(Reset(true));
+            ResetCall();
+            // Future.delayed(const Duration(milliseconds: 1200), () {
+            //   StoreProvider.of<AppState>(context).dispatch(Reset(false));
+            // });
+          },
         ),
-        onTap: () {
-          // StoreProvider.of<AppState>(context).dispatch(Reset(true));
-          ResetCall();
-          // Future.delayed(const Duration(milliseconds: 1200), () {
-          //   StoreProvider.of<AppState>(context).dispatch(Reset(false));
-          // });
-        },
       ),
       width: 30,
       height: 30,
       decoration: new BoxDecoration(
-        color: Colors.green,
+        color: Colors.transparent,
         shape: BoxShape.circle,
       ),
     );

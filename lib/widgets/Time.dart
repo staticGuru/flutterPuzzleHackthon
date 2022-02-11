@@ -17,10 +17,10 @@ class Time extends StatelessWidget {
       padding: EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: Colors.green,
+        color: Colors.transparent,
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
             child: Icon(Icons.timer),
@@ -32,6 +32,7 @@ class Time extends StatelessWidget {
               fontSize: 18,
               decoration: TextDecoration.none,
               color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           )
         ],

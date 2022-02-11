@@ -12,9 +12,22 @@ class MyTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
+      color: Colors.red,
+      // decoration: BoxDecoration(
+      //     gradient: LinearGradient(
+      //   begin: Alignment.topRight,
+      //   end: Alignment.bottomLeft,
+      //   colors: [
+      //     Color.fromARGB(255, 0, 162, 255),
+      //     Color.fromARGB(255, 0, 255, 145)
+      //   ],
+      // )),
+      //  gradient: LinearGradient(colors: [
+      //     Color.fromARGB(255, 0, 162, 255),
+      //     Color.fromARGB(255, 0, 255, 145)
+      //   ]),
       width: double.infinity,
-      height: 150,
+      // height: 150,
       child: Column(
         children: [
           Text(
@@ -25,11 +38,33 @@ class MyTitle extends StatelessWidget {
                 color: Colors.white,
                 decoration: TextDecoration.none),
           ),
-          Move(move),
-          Speech((e) {
-            print("eee $e");
-            clickGrid(e, 'AI');
-          })
+          Row(
+            children: [
+              Flexible(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Text(
+                      "Statistics",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          color: Colors.white,
+                          decoration: TextDecoration.none),
+                    ),
+                    Move(move),
+                  ],
+                ),
+              ),
+              Flexible(
+                flex: 2,
+                child: Speech((e) {
+                  print("eee $e");
+                  clickGrid(e, 'AI');
+                }),
+              )
+            ],
+          ),
         ],
       ),
     );

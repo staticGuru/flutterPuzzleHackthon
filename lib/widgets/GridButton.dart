@@ -10,20 +10,35 @@ class GridButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: buttonsize.toDouble(),
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Color.fromARGB(255, 251, 176, 64),
+            Color.fromARGB(255, 239, 66, 54),
+          ],
+        ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
         ),
       ),
-      color: Color.fromARGB(220, 132, 36, 12),
-      shape: RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(8.0),
+      child: RaisedButton(
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: buttonsize.toDouble(),
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        color: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(10.0),
+        ),
+        onPressed: click,
       ),
-      onPressed: click,
     );
   }
 }

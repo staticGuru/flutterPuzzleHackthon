@@ -64,7 +64,7 @@ class _levelSelectionState extends State<levelSelection> {
                 child: Center(
                     child: ListView(children: [
                   Image.asset(images[index]["image"],
-                      fit: BoxFit.fill, width: 1000, height: 200),
+                      fit: BoxFit.fill, height: 200),
                   SizedBox(height: 10),
                   Center(
                       child: Text(images[index]["name"],

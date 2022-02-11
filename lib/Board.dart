@@ -3,8 +3,11 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lottie/lottie.dart';
+import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:slidingpuzzle/models/app_state.dart';
 import 'package:slidingpuzzle/redux/actions.dart';
+import 'package:slidingpuzzle/widgets/ResetButton.dart';
+import 'package:slidingpuzzle/widgets/Time.dart';
 import 'widgets/Menu.dart';
 import 'widgets/MyTitle.dart';
 import 'widgets/Grid.dart';
@@ -75,9 +78,32 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
     }
 
     return Scaffold(
+      appBar: NewGradientAppBar(
+        title: Container(child: Time(secondsPassed)),
+        gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color.fromARGB(255, 0, 162, 255),
+              Color.fromARGB(255, 0, 255, 145)
+            ]),
+        actions: [
+          Center(
+            child: ResetButton(reset, "Reset"),
+          )
+        ],
+      ),
       body: Container(
           height: size.height,
-          color: Colors.transparent,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color.fromARGB(255, 0, 162, 255),
+              Color.fromARGB(255, 0, 255, 145)
+            ],
+          )),
           child: StoreConnector<AppState, AppState>(
               converter: (store) => store.state,
               builder: (context, state) {
@@ -89,14 +115,18 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
-                          Menu(reset, move, secondsPassed, size, sound),
-                          Grid(
-                              numbers,
-                              size,
-                              clickGrid,
-                              gameData[widget.index]["buttonsize"],
-                              gameData[widget.index]["matrix"]),
-                          MyTitle(size, move, clickGrid)
+                          // Menu(reset, move, secondsPassed, size, sound),
+                          Flexible(
+                            flex: 3,
+                            child: Grid(
+                                numbers,
+                                size,
+                                clickGrid,
+                                gameData[widget.index]["buttonsize"],
+                                gameData[widget.index]["matrix"]),
+                          ),
+                          Flexible(
+                              flex: 1, child: MyTitle(size, move, clickGrid))
                         ],
                       );
               })),
