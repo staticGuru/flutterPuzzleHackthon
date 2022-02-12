@@ -25,7 +25,7 @@ class Menu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             ResetButton(reset),
-            Time(secondsPassed),
+            Time(secondsPassed, Colors.black),
             // Move(move),
             SoundControl(sound)
           ],

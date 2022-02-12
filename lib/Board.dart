@@ -9,6 +9,7 @@ import 'package:slidingpuzzle/redux/actions.dart';
 import 'package:slidingpuzzle/widgets/ResetButton.dart';
 import 'package:slidingpuzzle/widgets/Time.dart';
 import 'package:slidingpuzzle/widgets/popupDialog.dart';
+import 'package:slidingpuzzle/widgets/winningDialog.dart';
 import 'widgets/Menu.dart';
 import 'widgets/MyTitle.dart';
 import 'widgets/Grid.dart';
@@ -80,7 +81,7 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
 
     return Scaffold(
       appBar: NewGradientAppBar(
-        title: Container(child: Time(secondsPassed)),
+        title: Container(child: Time(secondsPassed, Colors.white)),
         gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
@@ -151,10 +152,10 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   }
 
   void clickGrid(b, mode) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => popupDialog(context),
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) => popupDialog(context),
+    // );
     var index = b.runtimeType == int ? b : int.parse(b);
     print("clikddd $b $index ${b.runtimeType} $numbers");
     if (index != null && mode == 'AI') {
@@ -228,44 +229,12 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   }
 
   void checkWin() {
-    if (true) {
+    if (isSorted(numbers)) {
       isActive = false;
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)), //this right here
-              child: Container(
-                height: 200,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "You Win!!",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      SizedBox(
-                        width: 220.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text(
-                            "Close",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          color: Colors.blue,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
+            return winningDialog(secondsPassed, move, reset);
           });
     }
   }
