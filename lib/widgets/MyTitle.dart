@@ -5,9 +5,10 @@ import 'package:slidingpuzzle/widgets/Speech.dart';
 class MyTitle extends StatelessWidget {
   var size;
   int move;
+  int tiles;
   Function clickGrid;
 
-  MyTitle(this.size, this.move, this.clickGrid);
+  MyTitle(this.size, this.move, this.clickGrid, this.tiles);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class MyTitle extends StatelessWidget {
                           color: Colors.white,
                           decoration: TextDecoration.none),
                     ),
-                    Move(move),
+                    Move(move, tiles),
                   ],
                 ),
               ),

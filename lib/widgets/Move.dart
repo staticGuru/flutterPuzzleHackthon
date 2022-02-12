@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class Move extends StatelessWidget {
   int move;
+  int tiles;
 
-  Move(this.move);
+  Move(this.move, this.tiles);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class Move extends StatelessWidget {
                 fontSize: 18),
           ),
           Text(
-            "Tiles: ${move}",
+            "Tiles: ${tiles}",
             style: TextStyle(
                 color: Colors.white,
                 decoration: TextDecoration.none,

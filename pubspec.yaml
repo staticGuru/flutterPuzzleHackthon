@@ -59,6 +59,7 @@ flutter:
     - assets/animations/ResetAnimation.json
     - assets/animations/startButton.json
     - assets/animations/winner.json
+    - assets/animations/confusedAI.json
     - assets/backgroundSoundEffect.mp3
     - assets/images/clock.png
     - assets/images/4x4.png
@@ -68,6 +69,7 @@ flutter:
     - assets/images/noaispeech.png
     - assets/images/background.jpg
     - assets/images/move.png
+    - assets/images/wrongAIResult.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

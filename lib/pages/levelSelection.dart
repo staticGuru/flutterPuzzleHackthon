@@ -145,7 +145,7 @@ class _levelSelectionState extends State<levelSelection> {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           SafeArea(child: Board(index)),
-                                      fullscreenDialog: true,
+                                      // fullscreenDialog: true,
                                     ));
                               },
                               child: GradientText(

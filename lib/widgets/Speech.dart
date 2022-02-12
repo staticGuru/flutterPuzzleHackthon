@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:slidingpuzzle/widgets/dialogFromAI.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -67,10 +68,12 @@ class _SpeechState extends State<Speech> {
   Widget build(BuildContext context) {
     return Column(children: [
       // HeaderWidget(),
-      SessionOptionsWidget(_currentLocaleId, _switchLang, _localeNames,
-          _logEvents, _switchLogging),
+
       SpeechControlWidget(_hasSpeech, speech.isListening, startListening,
           stopListening, cancelListening),
+      SessionOptionsWidget(_currentLocaleId, _switchLang, _localeNames,
+          _logEvents, _switchLogging),
+
       // Expanded(
       //   child: RecognitionResultsWidget(lastWords: lastWords, level: level),
       // ),
@@ -97,7 +100,7 @@ class _SpeechState extends State<Speech> {
         listenFor: Duration(seconds: 30),
         pauseFor: Duration(seconds: 5),
         partialResults: true,
-        localeId: 'en_IN',
+        localeId: _currentLocaleId,
         onSoundLevelChange: soundLevelListener,
         cancelOnError: true,
         listenMode: ListenMode.confirmation);
@@ -128,11 +131,17 @@ class _SpeechState extends State<Speech> {
     setState(() {
       lastWords = '${result.recognizedWords} - ${result.finalResult}';
     });
-    print("Answer ${result.recognizedWords} ${result}");
+
     print('Answer ${int.parse(result.recognizedWords).runtimeType} $result');
     if (result.finalResult) {
+      print("Answer--finalresult-- ${result.recognizedWords}");
       widget.clickGrid(result.recognizedWords);
     } else {
+      // showDialog(
+      //     context: context,
+      //     builder: (BuildContext context) {
+      //       return dialogFromAI(0, "speech", () {});
+      //     });
       print(result.recognizedWords);
     }
   }
@@ -314,6 +323,11 @@ class SpeechControlWidget extends StatelessWidget {
         //   onPressed: !hasSpeech || isListening ? null : startListening,
         //   child: Text('Start'),
         // ),
+        Text("Talk with AI   ",
+            style: TextStyle(
+                fontSize: 18.0,
+                color: Colors.white,
+                fontWeight: FontWeight.w500)),
         !isListening
             ? GestureDetector(
                 onTap: !hasSpeech || isListening ? null : startListening,
@@ -355,21 +369,38 @@ class SessionOptionsWidget extends StatelessWidget {
     return Container(
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: DropdownButton<String>(
-          dropdownColor: Color.fromARGB(174, 0, 221, 255),
-          onChanged: (selectedVal) => switchLang(selectedVal),
-          value: currentLocaleId,
-          items: localeNames
-              .map(
-                (localeName) => DropdownMenuItem(
-                  value: localeName.localeId,
-                  child: Text(
-                    localeName.name,
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 10.0),
+          child: DropdownButton<String>(
+            dropdownColor: Color.fromARGB(174, 0, 221, 255),
+            onChanged: (selectedVal) => switchLang(selectedVal),
+            value: currentLocaleId,
+            elevation: 16,
+            icon: const Icon(Icons.arrow_drop_up_outlined),
+            underline: Container(
+              height: 2,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Color.fromARGB(255, 0, 255, 145),
+                  Color.fromARGB(188, 0, 162, 255),
+                ],
+              )),
+            ),
+            items: localeNames
+                .map(
+                  (localeName) => DropdownMenuItem(
+                    value: localeName.localeId,
+                    child: Text(
+                      localeName.name,
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
                   ),
-                ),
-              )
-              .toList(),
+                )
+                .toList(),
+          ),
         ),
       ),
     );

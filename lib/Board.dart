@@ -8,6 +8,7 @@ import 'package:slidingpuzzle/models/app_state.dart';
 import 'package:slidingpuzzle/redux/actions.dart';
 import 'package:slidingpuzzle/widgets/ResetButton.dart';
 import 'package:slidingpuzzle/widgets/Time.dart';
+import 'package:slidingpuzzle/widgets/dialogFromAI.dart';
 import 'package:slidingpuzzle/widgets/popupDialog.dart';
 import 'package:slidingpuzzle/widgets/winningDialog.dart';
 import 'widgets/Menu.dart';
@@ -24,7 +25,7 @@ class Board extends StatefulWidget {
 
 class _BoardState extends State<Board> with WidgetsBindingObserver {
   static final List<dynamic> gameData = [
-    {"arrayLength": 16, "matrix": 4, "buttonsize": 30},
+    {"arrayLength": 9, "matrix": 3, "buttonsize": 30},
     {"arrayLength": 25, "matrix": 5, "buttonsize": 20},
     {"arrayLength": 36, "matrix": 6, "buttonsize": 15}
   ];
@@ -136,7 +137,9 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
                                 gameData[widget.index]["matrix"]),
                           ),
                           Flexible(
-                              flex: 1, child: MyTitle(size, move, clickGrid))
+                              flex: 1,
+                              child: MyTitle(size, move, clickGrid,
+                                  gameData[widget.index]["arrayLength"] - 1))
                         ],
                       );
               })),
@@ -152,6 +155,8 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   }
 
   void clickGrid(b, mode) {
+    print("777777777calledfffffffffffffff");
+
     // showDialog(
     //   context: context,
     //   builder: (BuildContext context) => popupDialog(context),
@@ -191,6 +196,13 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
       print(numbers);
 
       checkWin();
+    } else {
+      print("dialog calledfffffffffffffff");
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return dialogFromAI(1000, "board", () {});
+          });
     }
   }
 
