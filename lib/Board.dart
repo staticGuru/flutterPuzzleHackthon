@@ -88,8 +88,16 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
               Color.fromARGB(255, 0, 255, 145)
             ]),
         actions: [
-          Center(
-            child: ResetButton(reset, "Reset"),
+          IconButton(
+            tooltip: 'Shuffle',
+            icon: Icon(
+              Icons.replay,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              reset();
+              //HomeBody().onClear();  //this has error
+            },
           )
         ],
       ),
@@ -113,7 +121,7 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
+                        mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           // Menu(reset, move, secondsPassed, size, sound),
                           Flexible(
@@ -150,7 +158,7 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
     }
     if (index != null) {
       print(numbers.indexOf(index));
-      audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.MEDIA_PLAYER);
+      audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.LOW_LATENCY);
       if (secondsPassed == 0) {
         isActive = true;
       }
@@ -191,13 +199,13 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   void reset() {
     setState(() {
       numbers.shuffle();
-      Future.delayed(const Duration(milliseconds: 1000), () {
-        numbers.shuffle();
-      });
-      Future.delayed(const Duration(milliseconds: 2000), () {
-        numbers.shuffle();
-      });
-
+      // Future.delayed(const Duration(milliseconds: 1000), () {
+      //   numbers.shuffle();
+      // });
+      // Future.delayed(const Duration(milliseconds: 2000), () {
+      //   numbers.shuffle();
+      // });
+      print(numbers);
       move = 0;
       secondsPassed = 0;
       isActive = false;

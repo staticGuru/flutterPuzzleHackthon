@@ -36,6 +36,7 @@ dependencies:
   redux: ^5.0.0
   speech_to_text: ^5.4.2
   new_gradient_app_bar: ^0.2.0
+  simple_gradient_text: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +57,7 @@ flutter:
     - assets/MyCustomSoundEffect.mp3
     - assets/ResetSoundEffect.mp3
     - assets/animations/ResetAnimation.json
+    - assets/animations/startButton.json
     - assets/backgroundSoundEffect.mp3
     - assets/images/clock.png
     - assets/images/4x4.png
@@ -63,6 +65,7 @@ flutter:
     - assets/images/6x6.png
     - assets/images/aispeech.png
     - assets/images/noaispeech.png
+    - assets/images/background.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

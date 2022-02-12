@@ -67,17 +67,10 @@ class _SpeechState extends State<Speech> {
   Widget build(BuildContext context) {
     return Column(children: [
       // HeaderWidget(),
-      Container(
-        child: Column(
-          children: <Widget>[
-            // InitSpeechWidget(_hasSpeech, initSpeechState),
-            SpeechControlWidget(_hasSpeech, speech.isListening, startListening,
-                stopListening, cancelListening),
-            // SessionOptionsWidget(_currentLocaleId, _switchLang,
-            //     _localeNames, _logEvents, _switchLogging),
-          ],
-        ),
-      ),
+      SessionOptionsWidget(_currentLocaleId, _switchLang, _localeNames,
+          _logEvents, _switchLogging),
+      SpeechControlWidget(_hasSpeech, speech.isListening, startListening,
+          stopListening, cancelListening),
       // Expanded(
       //   child: RecognitionResultsWidget(lastWords: lastWords, level: level),
       // ),
@@ -325,12 +318,12 @@ class SpeechControlWidget extends StatelessWidget {
             ? GestureDetector(
                 onTap: !hasSpeech || isListening ? null : startListening,
                 child: Image.asset('assets/images/noaispeech.png',
-                    fit: BoxFit.fill, width: 60, height: 60),
+                    fit: BoxFit.fill, width: 40, height: 40),
               )
             : GestureDetector(
                 onTap: isListening ? stopListening : null,
                 child: Image.asset('assets/images/aispeech.png',
-                    fit: BoxFit.fill, width: 60, height: 60),
+                    fit: BoxFit.fill, width: 40, height: 40),
               ),
         // TextButton(
         //   onPressed: isListening ? stopListening : null,
@@ -359,36 +352,26 @@ class SessionOptionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        Row(
-          children: [
-            Text('Language: '),
-            DropdownButton<String>(
-              onChanged: (selectedVal) => switchLang(selectedVal),
-              value: currentLocaleId,
-              items: localeNames
-                  .map(
-                    (localeName) => DropdownMenuItem(
-                      value: localeName.localeId,
-                      child: Text(localeName.name),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ],
+    return Container(
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: DropdownButton<String>(
+          dropdownColor: Color.fromARGB(174, 0, 221, 255),
+          onChanged: (selectedVal) => switchLang(selectedVal),
+          value: currentLocaleId,
+          items: localeNames
+              .map(
+                (localeName) => DropdownMenuItem(
+                  value: localeName.localeId,
+                  child: Text(
+                    localeName.name,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
+              )
+              .toList(),
         ),
-        Row(
-          children: [
-            Text('Log events: '),
-            Checkbox(
-              value: logEvents,
-              onChanged: switchLogging,
-            ),
-          ],
-        )
-      ],
+      ),
     );
   }
 }

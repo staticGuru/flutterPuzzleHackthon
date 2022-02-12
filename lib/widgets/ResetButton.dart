@@ -6,9 +6,8 @@ import 'package:slidingpuzzle/redux/actions.dart';
 
 class ResetButton extends StatelessWidget {
   Function reset;
-  String text;
 
-  ResetButton(this.reset, this.text);
+  ResetButton(this.reset);
   AudioCache audioCache = AudioCache();
 
   AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
@@ -40,7 +39,7 @@ class ResetButton extends StatelessWidget {
       width: 30,
       height: 30,
       decoration: new BoxDecoration(
-        color: Colors.transparent,
+        color: Colors.green,
         shape: BoxShape.circle,
       ),
     );

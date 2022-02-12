@@ -12,7 +12,7 @@ class MyTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+      color: Colors.transparent,
       // decoration: BoxDecoration(
       //     gradient: LinearGradient(
       //   begin: Alignment.topRight,
@@ -26,7 +26,7 @@ class MyTitle extends StatelessWidget {
       //     Color.fromARGB(255, 0, 162, 255),
       //     Color.fromARGB(255, 0, 255, 145)
       //   ]),
-      width: double.infinity,
+      // width: double.infinity,
       // height: 150,
       child: Column(
         children: [
