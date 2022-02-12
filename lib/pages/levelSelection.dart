@@ -88,7 +88,7 @@ class _levelSelectionState extends State<levelSelection> {
                 itemCount: images.length,
                 options: CarouselOptions(
                   enableInfiniteScroll: false,
-                  // height: 400,
+                  height: 400,
                   aspectRatio: 24 / 8,
                   enlargeCenterPage: true,
                   autoPlay: true,
@@ -115,7 +115,9 @@ class _levelSelectionState extends State<levelSelection> {
                         fit: BoxFit.fitHeight,
                         child: Column(children: [
                           // Image.asset(images[index]["image"],
-                          //     fit: BoxFit.fill, height: 200, width: 300),
+                          //     fit: BoxFit.fill,
+                          //     height: 200,
+                          //     width: double.infinity),
                           Center(
                               child: Text(images[index]["name"],
                                   style: GoogleFonts.architectsDaughter(
