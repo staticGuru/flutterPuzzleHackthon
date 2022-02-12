@@ -143,8 +143,10 @@ class _levelSelectionState extends State<levelSelection> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            SafeArea(child: Board(index))));
+                                      builder: (context) =>
+                                          SafeArea(child: Board(index)),
+                                      fullscreenDialog: true,
+                                    ));
                               },
                               child: GradientText(
                                 'START',

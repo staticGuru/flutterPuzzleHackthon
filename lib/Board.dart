@@ -8,6 +8,7 @@ import 'package:slidingpuzzle/models/app_state.dart';
 import 'package:slidingpuzzle/redux/actions.dart';
 import 'package:slidingpuzzle/widgets/ResetButton.dart';
 import 'package:slidingpuzzle/widgets/Time.dart';
+import 'package:slidingpuzzle/widgets/popupDialog.dart';
 import 'widgets/Menu.dart';
 import 'widgets/MyTitle.dart';
 import 'widgets/Grid.dart';
@@ -150,6 +151,10 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   }
 
   void clickGrid(b, mode) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => popupDialog(context),
+    );
     var index = b.runtimeType == int ? b : int.parse(b);
     print("clikddd $b $index ${b.runtimeType} $numbers");
     if (index != null && mode == 'AI') {
@@ -223,7 +228,7 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   }
 
   void checkWin() {
-    if (isSorted(numbers)) {
+    if (true) {
       isActive = false;
       showDialog(
           context: context,
