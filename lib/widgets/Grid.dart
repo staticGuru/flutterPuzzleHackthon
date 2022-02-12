@@ -24,6 +24,8 @@ class Grid extends StatelessWidget {
               converter: (store) => store.state,
               builder: (context, state) {
                 return GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: matrix,
                     mainAxisSpacing: 5,

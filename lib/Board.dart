@@ -91,17 +91,42 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
               Color.fromARGB(255, 0, 255, 145)
             ]),
         actions: [
-          IconButton(
-            tooltip: 'Shuffle',
-            icon: Icon(
-              Icons.replay,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              reset();
-              //HomeBody().onClear();  //this has error
-            },
+          Center(
+            child: GestureDetector(
+                onTap: () {
+                  reset();
+                },
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.replay,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        Text("Shuffle",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500)),
+                      ],
+                    ),
+                  ),
+                )),
           )
+          // IconButton(
+          //   tooltip: 'Shuffle',
+          // icon: Icon(
+          //   Icons.replay,
+          //   color: Colors.white,
+          // ),
+          //   onPressed: () {
+          //     reset();
+          //     //HomeBody().onClear();  //this has error
+          //   },
+          // )
         ],
       ),
       body: Container(

@@ -105,6 +105,7 @@ class _SpeechState extends State<Speech> {
         cancelOnError: true,
         listenMode: ListenMode.confirmation);
     setState(() {});
+    print("listenerr call");
   }
 
   void stopListening() {
@@ -128,19 +129,23 @@ class _SpeechState extends State<Speech> {
   void resultListener(SpeechRecognitionResult result) {
     _logEvent(
         'Result listener final: ${result.finalResult}, words: ${result.recognizedWords}');
+    print(
+        'begin==> ${result.finalResult} ${result.recognizedWords.runtimeType} $result');
+
     setState(() {
       lastWords = '${result.recognizedWords} - ${result.finalResult}';
     });
-
-    print('Answer ${int.parse(result.recognizedWords).runtimeType} $result');
-    if (result.finalResult) {
+    var conversion = int.tryParse(result.recognizedWords);
+    print('conv---> $conversion');
+    print('Answer==> ${result.recognizedWords} $result');
+    if (conversion != null && result.recognizedWords != null) {
       print("Answer--finalresult-- ${result.recognizedWords}");
       widget.clickGrid(result.recognizedWords);
     } else {
       // showDialog(
       //     context: context,
       //     builder: (BuildContext context) {
-      //       return dialogFromAI(0, "speech", () {});
+      //       return dialogFromAI(0, result.recognizedWords, () {});
       //     });
       print(result.recognizedWords);
     }
@@ -161,6 +166,7 @@ class _SpeechState extends State<Speech> {
     setState(() {
       lastError = '${error.errorMsg} - ${error.permanent}';
     });
+    print('lasterrorrr--> $lastError');
   }
 
   void statusListener(String status) {
