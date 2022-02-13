@@ -38,6 +38,7 @@ dependencies:
   new_gradient_app_bar: ^0.2.0
   simple_gradient_text: ^1.2.2
   animated_widgets: ^1.1.0
+  flame_audio: 1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,7 @@ flutter:
     - assets/animations/winner.json
     - assets/animations/confusedAI.json
     - assets/backgroundSoundEffect.mp3
+    - assets/audio/backgroundSound.mp3
     - assets/images/clock.png
     - assets/images/4x4.png
     - assets/images/5x5.png

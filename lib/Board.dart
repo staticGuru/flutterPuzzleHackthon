@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lottie/lottie.dart';
@@ -52,8 +53,10 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
     numbers.shuffle();
 
     audioCache = new AudioCache(fixedPlayer: player);
+    FlameAudio.bgm.initialize();
     Future.delayed(const Duration(milliseconds: 3000), () {
       StoreProvider.of<AppState>(context).dispatch(Boardani(false));
+      FlameAudio.bgm.play('backgroundSound.mp3', volume: .5);
     });
   }
 
@@ -66,6 +69,11 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   @override
   void deactivate() {
     StoreProvider.of<AppState>(context).dispatch(Boardani(true));
+    FlameAudio.bgm.stop();
+    // FlameAudio.bgm.clear('backgroundSound.mp3');
+    // FlameAudio.bgm.clearCache();
+
+    FlameAudio.bgm.dispose();
     super.deactivate();
   }
 
