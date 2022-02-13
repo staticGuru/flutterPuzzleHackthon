@@ -167,6 +167,11 @@ class _SpeechState extends State<Speech> {
       lastError = '${error.errorMsg} - ${error.permanent}';
     });
     print('lasterrorrr--> $lastError');
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return dialogFromAI(0, error.errorMsg, () {});
+        });
   }
 
   void statusListener(String status) {

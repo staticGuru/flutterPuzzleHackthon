@@ -145,7 +145,9 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
               builder: (context, state) {
                 return state.boardani
                     ? Lottie.asset("assets/animations/ResetAnimation.json",
-                        fit: BoxFit.contain)
+                        fit: BoxFit.contain,
+                        width: double.infinity,
+                        height: double.infinity)
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -226,7 +228,7 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return dialogFromAI(1000, "board", () {});
+            return dialogFromAI(1000, b, () {});
           });
     }
   }

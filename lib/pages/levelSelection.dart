@@ -14,7 +14,7 @@ class levelSelection extends StatefulWidget {
 
 class _levelSelectionState extends State<levelSelection> {
   final List<dynamic> images = [
-    {"image": 'assets/images/4x4.png', "name": "Easy", "number": "4x4"},
+    {"image": 'assets/images/4x4.png', "name": "Easy", "number": "3x3"},
     {"image": 'assets/images/5x5.png', "name": "Medium", "number": "5x5"},
     {"image": 'assets/images/6x6.png', "name": "Hard", "number": "6x6"},
   ];
