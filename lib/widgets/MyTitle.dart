@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slidingpuzzle/widgets/Move.dart';
 import 'package:slidingpuzzle/widgets/Speech.dart';
+import 'dart:io' show Platform;
 
 class MyTitle extends StatelessWidget {
   var size;
@@ -14,21 +15,6 @@ class MyTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      // decoration: BoxDecoration(
-      //     gradient: LinearGradient(
-      //   begin: Alignment.topRight,
-      //   end: Alignment.bottomLeft,
-      //   colors: [
-      //     Color.fromARGB(255, 0, 162, 255),
-      //     Color.fromARGB(255, 0, 255, 145)
-      //   ],
-      // )),
-      //  gradient: LinearGradient(colors: [
-      //     Color.fromARGB(255, 0, 162, 255),
-      //     Color.fromARGB(255, 0, 255, 145)
-      //   ]),
-      // width: double.infinity,
-      // height: 150,
       child: Column(
         children: [
           Text(
@@ -57,13 +43,15 @@ class MyTitle extends StatelessWidget {
                   ],
                 ),
               ),
-              Flexible(
-                flex: 2,
-                child: Speech((e) {
-                  print("eee $e");
-                  clickGrid(e, 'AI');
-                }),
-              )
+              Platform.isAndroid
+                  ? Flexible(
+                      flex: 2,
+                      child: Speech((e) {
+                        print("eee $e");
+                        clickGrid(e, 'AI');
+                      }),
+                    )
+                  : SizedBox(height: 0, width: 0)
             ],
           ),
         ],

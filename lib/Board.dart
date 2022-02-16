@@ -159,22 +159,28 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           // Menu(reset, move, secondsPassed, size, sound),
                           Flexible(
                             flex: 3,
-                            child: Grid(
-                                numbers,
-                                size,
-                                clickGrid,
-                                gameData[widget.index]["buttonsize"],
-                                gameData[widget.index]["matrix"]),
+                            child: Container(
+                              constraints:
+                                  BoxConstraints(maxWidth: 400, maxHeight: 600),
+                              child: Grid(
+                                  numbers,
+                                  size,
+                                  clickGrid,
+                                  gameData[widget.index]["buttonsize"],
+                                  gameData[widget.index]["matrix"]),
+                            ),
                           ),
                           Flexible(
                               flex: 1,
-                              child: MyTitle(size, move, clickGrid,
-                                  gameData[widget.index]["arrayLength"] - 1))
+                              child: Center(
+                                child: MyTitle(size, move, clickGrid,
+                                    gameData[widget.index]["arrayLength"] - 1),
+                              ))
                         ],
                       );
               })),
