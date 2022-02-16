@@ -19,15 +19,27 @@ class _levelSelectionState extends State<levelSelection> {
     {"image": 'assets/images/6x6.png', "name": "Hard", "number": "6x6"},
   ];
 
-  @override
-  void initState() {
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   images.forEach((imageUrl) {
-    //     precacheImage(NetworkImage(imageUrl), context);
-    //   });
-    // });
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   // WidgetsBinding.instance.addPostFrameCallback((_) {
+  //   //   images.forEach((imageUrl) {
+  //   //     precacheImage(NetworkImage(imageUrl), context);
+  //   //   });
+  //   // });
+  //   super.initState();
+  //   FlameAudio.bgm.initialize();
+  //   FlameAudio.bgm.play('levelSelection.mp3', volume: .5);
+  // }
+
+  // @override
+  // void deactivate() {
+  //   FlameAudio.bgm.stop();
+  //   // FlameAudio.bgm.clear('backgroundSound.mp3');
+  //   // FlameAudio.bgm.clearCache();
+
+  //   FlameAudio.bgm.dispose();
+  //   super.deactivate();
+  // }
 
   @override
   Widget build(BuildContext context) {

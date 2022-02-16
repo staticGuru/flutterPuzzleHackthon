@@ -102,7 +102,9 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
           Center(
             child: GestureDetector(
                 onTap: () {
+                  FlameAudio.play('shuffle.mp3', volume: 0.8);
                   reset();
+                  // FlameAudio.bgm.clear('shuffle.mp3');
                 },
                 child: Container(
                   child: Padding(
