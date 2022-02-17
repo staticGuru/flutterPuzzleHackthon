@@ -63,7 +63,6 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    print("Current state = $state");
   }
 
   @override
@@ -79,7 +78,6 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.index);
 
     final size = MediaQuery.of(context).size;
     if (timer == null) {
@@ -193,25 +191,20 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   void dispose() {
     player.stop();
 
-    print("dispose called");
     super.dispose();
   }
 
   void clickGrid(b, mode) {
-    print("777777777calledfffffffffffffff");
 
     // showDialog(
     //   context: context,
     //   builder: (BuildContext context) => popupDialog(context),
     // );
     var index = b.runtimeType == int ? b : int.parse(b);
-    print("clikddd $b $index ${b.runtimeType} $numbers");
     if (index != null && mode == 'AI') {
       index = numbers.indexOf(index) != -1 ? numbers.indexOf(index) : null;
-      print('ai $index');
     }
     if (index != null) {
-      print(numbers.indexOf(index));
       audioCache.play('MyCustomSoundEffect.mp3', mode: PlayerMode.LOW_LATENCY);
       if (secondsPassed == 0) {
         isActive = true;
@@ -236,11 +229,9 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
           numbers[index] = 0;
         });
       }
-      print(numbers);
 
       checkWin();
     } else {
-      print("dialog calledfffffffffffffff");
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -260,13 +251,7 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   void reset() {
     setState(() {
       numbers.shuffle();
-      // Future.delayed(const Duration(milliseconds: 1000), () {
-      //   numbers.shuffle();
-      // });
-      // Future.delayed(const Duration(milliseconds: 2000), () {
-      //   numbers.shuffle();
-      // });
-      print(numbers);
+    
       move = 0;
       secondsPassed = 0;
       isActive = false;

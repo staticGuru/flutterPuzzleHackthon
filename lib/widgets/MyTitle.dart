@@ -47,7 +47,6 @@ class MyTitle extends StatelessWidget {
                   ? Flexible(
                       flex: 2,
                       child: Speech((e) {
-                        print("eee $e");
                         clickGrid(e, 'AI');
                       }),
                     )

@@ -105,7 +105,6 @@ class _SpeechState extends State<Speech> {
         cancelOnError: true,
         listenMode: ListenMode.confirmation);
     setState(() {});
-    print("listenerr call");
   }
 
   void stopListening() {
@@ -129,17 +128,14 @@ class _SpeechState extends State<Speech> {
   void resultListener(SpeechRecognitionResult result) {
     _logEvent(
         'Result listener final: ${result.finalResult}, words: ${result.recognizedWords}');
-    print(
-        'begin==> ${result.finalResult} ${result.recognizedWords.runtimeType} $result');
-
+   
     setState(() {
       lastWords = '${result.recognizedWords} - ${result.finalResult}';
     });
     var conversion = int.tryParse(result.recognizedWords);
-    print('conv---> $conversion');
-    print('Answer==> ${result.recognizedWords} $result');
+  
     if (conversion != null && result.recognizedWords != null) {
-      print("Answer--finalresult-- ${result.recognizedWords}");
+
       widget.clickGrid(result.recognizedWords);
     } else {
       // showDialog(
@@ -166,7 +162,7 @@ class _SpeechState extends State<Speech> {
     setState(() {
       lastError = '${error.errorMsg} - ${error.permanent}';
     });
-    print('lasterrorrr--> $lastError');
+
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -186,13 +182,13 @@ class _SpeechState extends State<Speech> {
     setState(() {
       _currentLocaleId = selectedVal;
     });
-    print("curren --> $selectedVal");
+
   }
 
   void _logEvent(String eventDescription) {
     if (_logEvents) {
       var eventTime = DateTime.now().toIso8601String();
-      print('$eventTime $eventDescription');
+  
     }
   }
 
