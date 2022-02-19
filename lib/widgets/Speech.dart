@@ -97,7 +97,7 @@ class _SpeechState extends State<Speech> {
     // on some devices.
     speech.listen(
         onResult: resultListener,
-        listenFor: Duration(seconds: 30),
+        listenFor: Duration(seconds: 2),
         pauseFor: Duration(seconds: 5),
         partialResults: true,
         localeId: _currentLocaleId,
@@ -105,11 +105,13 @@ class _SpeechState extends State<Speech> {
         cancelOnError: true,
         listenMode: ListenMode.confirmation);
     setState(() {});
+    print("lastWordsconversion ---*******-> $lastWords");
   }
 
   void stopListening() {
     _logEvent('stop');
     speech.stop();
+
     setState(() {
       level = 0.0;
     });
@@ -128,21 +130,32 @@ class _SpeechState extends State<Speech> {
   void resultListener(SpeechRecognitionResult result) {
     _logEvent(
         'Result listener final: ${result.finalResult}, words: ${result.recognizedWords}');
-   
+
     setState(() {
       lastWords = '${result.recognizedWords} - ${result.finalResult}';
     });
     var conversion = int.tryParse(result.recognizedWords);
-  
-    if (conversion != null && result.recognizedWords != null) {
+    print("conversion----> $conversion");
+    print(
+        "recognizedWords---> ${result.recognizedWords} ${result.finalResult}");
 
-      widget.clickGrid(result.recognizedWords);
+    if (conversion != null && result.recognizedWords != null) {
+      if (result.finalResult) {
+        widget.clickGrid(result.recognizedWords);
+      }
+      // Future.delayed(const Duration(seconds: 5), () {
+      //   print("triggering recognizedwords--> ${result.recognizedWords}");
+
+      // });
     } else {
-      // showDialog(
-      //     context: context,
-      //     builder: (BuildContext context) {
-      //       return dialogFromAI(0, result.recognizedWords, () {});
-      //     });
+      if (result.finalResult) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return dialogFromAI(0, result.recognizedWords, () {});
+            });
+      }
+
       print(result.recognizedWords);
     }
   }
@@ -182,13 +195,11 @@ class _SpeechState extends State<Speech> {
     setState(() {
       _currentLocaleId = selectedVal;
     });
-
   }
 
   void _logEvent(String eventDescription) {
     if (_logEvents) {
       var eventTime = DateTime.now().toIso8601String();
-  
     }
   }
 
