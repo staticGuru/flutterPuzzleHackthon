@@ -2,12 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:slidingpuzzle/models/app_state.dart';
 import 'package:slidingpuzzle/pages/levelSelection.dart';
-import 'Board.dart';
 import 'package:slidingpuzzle/redux/reducers.dart';
 
 main() async {
@@ -33,7 +31,7 @@ class SlidingPuzzle extends StatelessWidget {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
-        title: "Sliding Puzzle",
+        title: "Puzzle Hack",
         debugShowCheckedModeBanner: false,
         home: SafeArea(child: levelSelection()),
       ),

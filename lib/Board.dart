@@ -7,12 +7,9 @@ import 'package:lottie/lottie.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:slidingpuzzle/models/app_state.dart';
 import 'package:slidingpuzzle/redux/actions.dart';
-import 'package:slidingpuzzle/widgets/ResetButton.dart';
 import 'package:slidingpuzzle/widgets/Time.dart';
 import 'package:slidingpuzzle/widgets/dialogFromAI.dart';
-import 'package:slidingpuzzle/widgets/popupDialog.dart';
 import 'package:slidingpuzzle/widgets/winningDialog.dart';
-import 'widgets/Menu.dart';
 import 'widgets/MyTitle.dart';
 import 'widgets/Grid.dart';
 
@@ -78,7 +75,6 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
     if (timer == null) {
       timer = Timer.periodic(duration, (Timer t) {
@@ -124,17 +120,6 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
                   ),
                 )),
           )
-          // IconButton(
-          //   tooltip: 'Shuffle',
-          // icon: Icon(
-          //   Icons.replay,
-          //   color: Colors.white,
-          // ),
-          //   onPressed: () {
-          //     reset();
-          //     //HomeBody().onClear();  //this has error
-          //   },
-          // )
         ],
       ),
       body: Container(
@@ -195,11 +180,6 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   }
 
   void clickGrid(b, mode) {
-
-    // showDialog(
-    //   context: context,
-    //   builder: (BuildContext context) => popupDialog(context),
-    // );
     var index = b.runtimeType == int ? b : int.parse(b);
     if (index != null && mode == 'AI') {
       index = numbers.indexOf(index) != -1 ? numbers.indexOf(index) : null;
@@ -251,7 +231,7 @@ class _BoardState extends State<Board> with WidgetsBindingObserver {
   void reset() {
     setState(() {
       numbers.shuffle();
-    
+
       move = 0;
       secondsPassed = 0;
       isActive = false;

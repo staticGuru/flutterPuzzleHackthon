@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:lottie/lottie.dart';
-import 'package:slidingpuzzle/widgets/Move.dart';
-import 'package:slidingpuzzle/widgets/Time.dart';
 
 class dialogFromAI extends StatelessWidget {
   int secondsPassed;
@@ -38,10 +35,6 @@ class dialogFromAI extends StatelessWidget {
                           color: Colors.redAccent,
                           fontWeight: FontWeight.bold),
                     ),
-                    // Text(
-                    //   "You have completed the puzzle!",
-                    //   style: TextStyle(fontSize: 16),
-                    // ),
                   ],
                 ),
                 Container(
@@ -51,28 +44,8 @@ class dialogFromAI extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Time(secondsPassed, Colors.black),
-                      // RichText(
-                      //   text: TextSpan(
-                      //     children: [
-                      //       WidgetSpan(
-                      //           child: Icon(
-                      //         FontAwesome.arrows_alt,
-                      //         size: 18,
-                      //       )),
-                      //       TextSpan(
-                      //         text: " ${move} moves",
-                      //         style: TextStyle(
-                      //             color: Colors.black,
-                      //             fontWeight: FontWeight.bold,
-                      //             // decoration: TextDecoration.none,
-                      //             fontSize: 18),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       Text(
-                        "I reconsigned below the word",
+                        "I most recently recognized",
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
@@ -92,7 +65,6 @@ class dialogFromAI extends StatelessWidget {
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
-                            // decoration: TextDecoration.none,
                             fontSize: 14),
                       ),
                     ],

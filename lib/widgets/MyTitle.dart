@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slidingpuzzle/widgets/Move.dart';
 import 'package:slidingpuzzle/widgets/Speech.dart';
-import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart';
 
 class MyTitle extends StatelessWidget {
   var size;
@@ -43,7 +43,9 @@ class MyTitle extends StatelessWidget {
                   ],
                 ),
               ),
-              Platform.isAndroid
+              !(defaultTargetPlatform == TargetPlatform.linux ||
+                      defaultTargetPlatform == TargetPlatform.macOS ||
+                      defaultTargetPlatform == TargetPlatform.windows)
                   ? Flexible(
                       flex: 2,
                       child: Speech((e) {

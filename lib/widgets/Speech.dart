@@ -15,9 +15,6 @@ class Speech extends StatefulWidget {
   _SpeechState createState() => _SpeechState();
 }
 
-/// An example that demonstrates the basic functionality of the
-/// SpeechToText plugin for using the speech recognition capability
-/// of the underlying platform.
 class _SpeechState extends State<Speech> {
   bool _hasSpeech = false;
   bool _logEvents = false;
@@ -37,10 +34,6 @@ class _SpeechState extends State<Speech> {
     initSpeechState();
   }
 
-  /// This initializes SpeechToText. That only has to be done
-  /// once per application, though calling it again is harmless
-  /// it also does nothing. The UX of the sample app ensures that
-  /// it can only be called once.
   Future<void> initSpeechState() async {
     _logEvent('Initialize');
     var hasSpeech = await speech.initialize(
@@ -49,8 +42,6 @@ class _SpeechState extends State<Speech> {
       debugLogging: true,
     );
     if (hasSpeech) {
-      // Get the list of languages installed on the supporting platform so they
-      // can be displayed in the UI for selection by the user.
       _localeNames = await speech.locales();
 
       var systemLocale = await speech.systemLocale();
@@ -67,34 +58,17 @@ class _SpeechState extends State<Speech> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      // HeaderWidget(),
-
       SpeechControlWidget(_hasSpeech, speech.isListening, startListening,
           stopListening, cancelListening),
       SessionOptionsWidget(_currentLocaleId, _switchLang, _localeNames,
           _logEvents, _switchLogging),
-
-      // Expanded(
-      //   child: RecognitionResultsWidget(lastWords: lastWords, level: level),
-      // ),
-      // Expanded(
-      //   flex: 1,
-      //   child: ErrorWidget(lastError: lastError),
-      // ),
-      // SpeechStatusWidget(speech: speech),
     ]);
   }
 
-  // This is called each time the users wants to start a new speech
-  // recognition session
   void startListening() {
     _logEvent('start listening');
     lastWords = '';
     lastError = '';
-    // Note that `listenFor` is the maximum, not the minimun, on some
-    // recognition will be stopped before this value is reached.
-    // Similarly `pauseFor` is a maximum not a minimum and may be ignored
-    // on some devices.
     speech.listen(
         onResult: resultListener,
         listenFor: Duration(seconds: 2),
@@ -105,7 +79,6 @@ class _SpeechState extends State<Speech> {
         cancelOnError: true,
         listenMode: ListenMode.confirmation);
     setState(() {});
-    print("lastWordsconversion ---*******-> $lastWords");
   }
 
   void stopListening() {
@@ -125,8 +98,6 @@ class _SpeechState extends State<Speech> {
     });
   }
 
-  /// This callback is invoked each time new recognition results are
-  /// available after `listen` is called.
   void resultListener(SpeechRecognitionResult result) {
     _logEvent(
         'Result listener final: ${result.finalResult}, words: ${result.recognizedWords}');
@@ -135,18 +106,11 @@ class _SpeechState extends State<Speech> {
       lastWords = '${result.recognizedWords} - ${result.finalResult}';
     });
     var conversion = int.tryParse(result.recognizedWords);
-    print("conversion----> $conversion");
-    print(
-        "recognizedWords---> ${result.recognizedWords} ${result.finalResult}");
 
     if (conversion != null && result.recognizedWords != null) {
       if (result.finalResult) {
         widget.clickGrid(result.recognizedWords);
       }
-      // Future.delayed(const Duration(seconds: 5), () {
-      //   print("triggering recognizedwords--> ${result.recognizedWords}");
-
-      // });
     } else {
       if (result.finalResult) {
         showDialog(
@@ -163,7 +127,7 @@ class _SpeechState extends State<Speech> {
   void soundLevelListener(double level) {
     minSoundLevel = min(minSoundLevel, level);
     maxSoundLevel = max(maxSoundLevel, level);
-    // _logEvent('sound level $level: $minSoundLevel - $maxSoundLevel ');
+
     setState(() {
       this.level = level;
     });
@@ -210,7 +174,6 @@ class _SpeechState extends State<Speech> {
   }
 }
 
-/// Displays the most recently recognized words and the sound level.
 class RecognitionResultsWidget extends StatelessWidget {
   const RecognitionResultsWidget({
     Key key,
@@ -225,12 +188,6 @@ class RecognitionResultsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        // Center(
-        //   child: Text(
-        //     'Recognized Words',
-        //     style: TextStyle(fontSize: 22.0),
-        //   ),
-        // ),
         Expanded(
           child: Stack(
             children: <Widget>[
@@ -243,31 +200,6 @@ class RecognitionResultsWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              // Positioned.fill(
-              //   bottom: 10,
-              //   child: Align(
-              //     alignment: Alignment.bottomCenter,
-              //     child: Container(
-              //       width: 40,
-              //       height: 40,
-              //       alignment: Alignment.center,
-              //       decoration: BoxDecoration(
-              //         boxShadow: [
-              //           BoxShadow(
-              //               blurRadius: .26,
-              //               spreadRadius: level * 1.5,
-              //               color: Colors.black.withOpacity(.05))
-              //         ],
-              //         color: Colors.white,
-              //         borderRadius: BorderRadius.all(Radius.circular(50)),
-              //       ),
-              //       child: IconButton(
-              //         icon: Icon(Icons.mic),
-              //         onPressed: () => null,
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),
@@ -292,34 +224,6 @@ class HeaderWidget extends StatelessWidget {
   }
 }
 
-/// Display the current error status from the speech
-/// recognizer
-class ErrorWidget extends StatelessWidget {
-  const ErrorWidget({
-    Key key,
-    @required this.lastError,
-  }) : super(key: key);
-
-  final String lastError;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Center(
-          child: Text(
-            'Error Status',
-            style: TextStyle(fontSize: 22.0),
-          ),
-        ),
-        Center(
-          child: Text(lastError),
-        ),
-      ],
-    );
-  }
-}
-
 /// Controls to start and stop speech recognition
 class SpeechControlWidget extends StatelessWidget {
   const SpeechControlWidget(this.hasSpeech, this.isListening,
@@ -337,10 +241,6 @@ class SpeechControlWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        // TextButton(
-        //   onPressed: !hasSpeech || isListening ? null : startListening,
-        //   child: Text('Start'),
-        // ),
         Text("Talk with AI   ",
             style: TextStyle(
                 fontSize: 18.0,
@@ -357,14 +257,6 @@ class SpeechControlWidget extends StatelessWidget {
                 child: Image.asset('assets/images/aispeech.png',
                     fit: BoxFit.fill, width: 40, height: 40),
               ),
-        // TextButton(
-        //   onPressed: isListening ? stopListening : null,
-        //   child: Text('Stop'),
-        // ),
-        // TextButton(
-        //   onPressed: isListening ? cancelListening : null,
-        //   child: Text('Cancel'),
-        // )
       ],
     );
   }
@@ -442,35 +334,6 @@ class InitSpeechWidget extends StatelessWidget {
           child: const Text('Initialize'),
         ),
       ],
-    );
-  }
-}
-
-/// Display the current status of the listener
-class SpeechStatusWidget extends StatelessWidget {
-  const SpeechStatusWidget({
-    Key key,
-    @required this.speech,
-  }) : super(key: key);
-
-  final SpeechToText speech;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 20),
-      color: Theme.of(context).backgroundColor,
-      child: Center(
-        child: speech.isListening
-            ? Text(
-                "I'm listening...",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              )
-            : Text(
-                'Not listening',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-      ),
     );
   }
 }
